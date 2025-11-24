@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Modern Muse – Japan Edition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Modern Muse – a calm, Japan-inspired space for travel, lifestyle, and beauty." />
+
+  <!-- Google Fonts (with Japanese support) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f7f3ee;           /* soft neutral */
+      --bg-alt: #ffffff;
+      --ink: #333333;          /* charcoal */
+      --subtle-ink: #777777;
+      --accent-sakura: #f2cdd3;/* sakura pink */
+      --accent-forest: #334a3a;/* deep green / sage-ish */
+      --border-light: #e4ddd6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border-light);
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid var(--border-light);
+      background: radial-gradient(circle at 30% 20%, var(--accent-sakura), var(--bg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Noto Serif JP", serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      display: block;
+    }
+
+    .brand-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--subtle-ink);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.1rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent-forest);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid var(--border-light);
+      padding: 0.15rem 0.5rem;
+      font-size: 0.78rem;
+      gap: 0.35rem;
+      background: var(--bg-alt);
+    }
+
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      padding: 0.1rem 0.4rem;
+      cursor: default;
+      font-size: 0.78rem;
+      font-family: inherit;
+      color: var(--subtle-ink);
+      border-radius: 999px;
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent-sakura);
+      color: #2e2222;
+      font-weight: 500;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0,2.1fr) minmax(0,1.6fr);
+      gap: 3rem;
+      align-items: center;
+      padding: 2.5rem 0 1rem;
+      position: relative;
+    }
+
+    .hero-copy {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .vertical-label {
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      height: 170px;
+      border-left: 1px solid var(--border-light);
+      padding-left: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-family: "Noto Serif JP", serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: var(--subtle-ink);
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--subtle-ink);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: 2rem;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-title-jp {
+      font-size: 1rem;
+      color: var(--accent-forest);
+      margin-top: 0.3rem;
+    }
+
+    .hero-body {
+      font-size: 0.95rem;
+      color: var(--ink);
+      max-width: 34rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-body span.jp-inline {
+      font-size: 0.88rem;
+      color: var(--subtle-ink);
+      display: block;
+      margin-top: 0.4rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      padding: 0.55rem 1.5rem;
+      border: none;
+      background: var(--accent-forest);
+      color: #fdfbf9;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.55rem 1.3rem;
+      border: 1px solid var(--border-light);
+      background: transparent;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--subtle-ink);
+      margin-top: 0.4rem;
+    }
+
+    .hero-media {
+      position: relative;
+    }
+
+    .hero-card {
+      border-radius: 20px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-light);
+      padding: 1.4rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    }
+
+    .hero-image {
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #f0e4dd, #f5f0eb);
+      height: 230px;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Put YOUR photo here if you want it as an <img> */
+    .hero-image-photo {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .hero-image-overlay {
+      position: absolute;
+      inset: 10%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.7);
+      pointer-events: none;
+    }
+
+    .hero-image-caption {
+      position: absolute;
+      left: 50%;
+      bottom: 1.2rem;
+      transform: translateX(-50%);
+      background: rgba(253, 250, 247, 0.88);
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .hero-image-caption span.jp {
+      display: block;
+      font-family: "Noto Serif JP", serif;
+      font-size: 0.78rem;
+      color: var(--accent-forest);
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--subtle-ink);
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 0.3rem 0.7rem;
+      background: #f7ebe8;
+      font-size: 0.78rem;
+    }
+
+    .hero-stamp {
+      position: absolute;
+      right: -12px;
+      top: -12px;
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      border: 1px dashed rgba(49,71,53,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-family: "Noto Serif JP", serif;
+      text-align: center;
+      background: #fdfaf7;
+    }
+
+    .section {
+      margin-top: 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 2rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .section-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .section-title-jp {
+      font-size: 0.85rem;
+      color: var(--accent-forest);
+    }
+
+    .section-subtitle {
+      font-size: 0.88rem;
+      color: var(--subtle-ink);
+      max-width: 26rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.5rem;
+    }
+
+    .story-card {
+      padding: 1.2rem;
+      border-radius: 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      min-height: 190px;
+    }
+
+    .story-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--subtle-ink);
+    }
+
+    .story-title {
+      font-size: 0.95rem;
+      font-family: "Noto Serif JP", serif;
+    }
+
+    .story-title span.jp {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--accent-forest);
+      margin-top: 0.18rem;
+    }
+
+    .story-body {
+      font-size: 0.86rem;
+      color: var(--ink);
+      margin-top: 0.2rem;
+    }
+
+    .story-meta {
+      font-size: 0.8rem;
+      color: var(--subtle-ink);
+      margin-top: auto;
+    }
+
+    .museletter {
+      margin-top: 3rem;
+      padding: 1.8rem 1.6rem;
+      border-radius: 18px;
+      border: 1px solid var(--border-light);
+      background: linear-gradient(135deg, #fdf8f5, #f6f2ef);
+      display: grid;
+      grid-template-columns: minmax(0,2.1fr) minmax(0,1.5fr);
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .museletter-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .museletter-title span.jp {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--accent-forest);
+    }
+
+    .museletter-text {
+      font-size: 0.88rem;
+      color: var(--ink);
+      max-width: 26rem;
+    }
+
+    .museletter-text span.jp-inline {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--subtle-ink);
+      margin-top: 0.3rem;
+    }
+
+    .museletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .field-label {
+      font-size: 0.8rem;
+      color: var(--subtle-ink);
+    }
+
+    .field-label span.jp {
+      margin-left: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--accent-forest);
+    }
+
+    .museletter-form input[type="email"] {
+      border-radius: 999px;
+      padding: 0.55rem 1rem;
+      border: 1px solid var(--border-light);
+      font-size: 0.86rem;
+      background: #fdfbfa;
+    }
+
+    .museletter-note {
+      font-size: 0.75rem;
+      color: var(--subtle-ink);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-light);
+      margin-top: 3rem;
+      padding: 1.4rem 1.5rem 1.6rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--subtle-ink);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 1.8rem;
+      }
+
+      .hero-copy {
+        padding-left: 0;
+      }
+
+      .vertical-label {
+        display: none;
+      }
+
+      .museletter {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <nav class="nav" aria-label="Main navigation">
+        <div class="brand-lockup">
+          <div class="brand-mark">MM</div>
+          <div class="brand-text">
+            <span class="brand-title">Modern Muse</span>
+            <span class="brand-subtitle">Travel · Lifestyle · Beauty</span>
+          </div>
+        </div>
+
+        <div class="nav-links">
+          <a href="#stories">Journal</a>
+          <a href="#museletter">Museletter</a>
+          <a href="#about">About</a>
+
+          <div class="lang-toggle" aria-label="Language toggle">
+            <button class="active" aria-label="English selected">EN</button>
+            <button aria-label="Japanese not active yet">日本語</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="shell">
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-heading">
+          <div class="hero-copy">
+            <div class="vertical-label">
+              モダンミューズ
+            </div>
+
+            <p class="hero-kicker">Modern Muse · Japan Edition</p>
+
+            <h1 class="hero-title" id="hero-heading">
+              <span>Soft girl energy,</span>
+              <span>in a slower city.</span>
+              <span>Modern Muse in Japan.</span>
+              <span class="hero-title-jp">日本の街で、やさしく暮らすミューズ。</span>
+            </h1>
+
+            <p class="hero-body">
+              This version of Modern Muse is for the days that feel like calm mornings in Tokyo. Soft light, warm coffee, and a city that still feels dreamy.
+              It’s the same travel, lifestyle, and beauty you know from my brand, just styled with Japanese color, spacing, and rhythm.
+              <span class="jp-inline">
+                日本のデザインや暮らし方からヒントを得て、余白・自然な色合い・おだやかな文章でサイトをローカライズしました。
+              </span>
+            </p>
+
+            <div class="hero-actions">
+              <button class="btn-primary">View Today’s Japan Edit</button>
+              <button class="btn-ghost">Browse Travel · Lifestyle · Beauty</button>
+            </div>
+
+            <p class="hero-note">
+              The layout, palette, and tone are simplified on purpose, with more whitespace, softer typography, and a gentler voice for Japanese readers.
+            </p>
+          </div>
+
+          <div class="hero-media">
+            <div class="hero-card">
+              <div class="hero-image">
+                <!-- Swap this src with one of YOUR photos -->
+                <img
+                  src="images/modern-muse-japan-hero.jpg"
+                  alt="A cozy, neutral-toned corner with coffee, a bag, and soft natural light, styled with Japanese-inspired minimal decor."
+                  class="hero-image-photo"
+                />
+                <div class="hero-image-overlay"></div>
+                <div class="hero-image-caption">
+                  <span class="jp">朝の一枚</span>
+                  A Modern Muse moment, reimagined in Japan.
+                </div>
+              </div>
+              <div class="hero-meta">
+                <span class="pill">Tokyo · Osaka · Kyoto</span>
+                <span>Travel · Lifestyle · Beauty</span>
+              </div>
+              <div class="hero-stamp">
+                Japan Edit<br/>2025
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STORIES / JOURNAL -->
+        <section class="section" id="stories" aria-labelledby="stories-heading">
+          <header class="section-header">
+            <div class="section-title-wrap">
+              <h2 class="section-title" id="stories-heading">Journal</h2>
+              <span class="section-title-jp">ミューズの日記</span>
+            </div>
+            <p class="section-subtitle">
+              Little snapshots of life: walking through side streets, putting on skincare, catching sunsets from trains. 
+              All softened with Japanese-inspired design.
+            </p>
+          </header>
+
+          <div class="card-grid">
+            <article class="story-card">
+              <p class="story-tag">Travel · Streets</p>
+              <h3 class="story-title">
+                Getting lost in a Kyoto side street
+                <span class="jp">京都の路地で、あえて迷う</span>
+              </h3>
+              <p class="story-body">
+                Lanterns, laundry lines, and the smell of dinner drifting from open windows. It’s that quiet, in-between part of the trip that feels the most real.
+              </p>
+           
+            </article>
+
+            <article class="story-card">
+              <p class="story-tag">Lifestyle · Home</p>
+              <h3 class="story-title">
+                Turning a tiny space into a calm corner
+                <span class="jp">小さな部屋を、落ち着く場所に</span>
+              </h3>
+              <p class="story-body">
+                Neutral walls, one plant, a simple tray, and a single framed print. Japanese interiors reminded me that “more” isn’t always better.
+              </p>
+            
+            </article>
+
+            <article class="story-card">
+              <p class="story-tag">Beauty · Rituals</p>
+              <h3 class="story-title">
+                Skincare as a travel ritual, not a checklist
+                <span class="jp">旅先のスキンケアを、小さな儀式に</span>
+              </h3>
+              <p class="story-body">
+                Cooling toner, warm towel, deep breath. Slowing down in a hotel bathroom after a long day of trains and city noise feels like its own kind of reset.
+              </p>
+           
+            </article>
+          </div>
+        </section>
+
+        <!-- ABOUT (short) -->
+        <section class="section" id="about" aria-labelledby="about-heading">
+          <header class="section-header">
+            <div class="section-title-wrap">
+              <h2 class="section-title" id="about-heading">About</h2>
+              <span class="section-title-jp">モダンミューズについて</span>
+            </div>
+            <p class="section-subtitle">
+              Modern Muse started as my space for romanticizing real life. Now, this version is styled for a Japanese audience.
+            </p>
+          </header>
+          <p style="font-size:0.9rem; max-width:46rem;">
+            I kept my usual focus on travel, lifestyle, and beauty, but shifted the way everything is presented. The color palette uses warm neutrals,
+            sakura pink, and deep green inspired by Japanese aesthetics. The typography is quieter and more readable, and there’s more whitespace
+            between sections so the page feels calm instead of crowded. I also added small Japanese phrases and a simple language toggle to show
+            how the site could eventually support bilingual content for Japanese readers.
+          </p>
+        </section>
+
+        <!-- MUSELETTER -->
+        <section class="museletter" id="museletter" aria-labelledby="museletter-heading">
+          <div>
+            <h2 class="museletter-title" id="museletter-heading">
+              Museletter
+              <span class="jp">ニュースレター</span>
+            </h2>
+            <p class="museletter-text">
+              A cozy newsletter with playlists, travel recs, and little journal prompts. Written in my usual Modern Muse voice, but with softer visuals for Japan.
+              <span class="jp-inline">
+                季節のムードボードや旅のおすすめ、心をととのえるための一言メモを、日本の読者も楽しめるようなデザインでお届けします。
+              </span>
+            </p>
+          </div>
+
+          <form class="museletter-form">
+            <label class="field-label">
+              Email
+              <span class="jp">メールアドレス</span>
+            </label>
+            <input type="email" name="email" placeholder="you@example.jp" aria-label="Email address" />
+
+            <button type="submit" class="btn-primary">
+              Join the Museletter
+            </button>
+
+            <p class="museletter-note">
+              The form is simple and bilingual on purpose. Japanese users expect clean forms, clear labels, and gentle copy instead of loud sales language.
+            </p>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <span>© 2025 Modern Muse · Japan Edition</span>
+        <div class="footer-links">
+          <span>Localized for Japanese color, layout, and tone.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
